@@ -1,0 +1,61 @@
+
+
+<HomeWidget>:
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, .8
+        Rectangle:
+            size: self.size
+    Label:
+        font_size: dp(30)
+        font_name: "fonts/Nasa.ttf"
+        text: root.parent.home_title
+        pos_hint: {"center_x": .5, "center_y": .6}
+    Button:
+        font_size: dp(25)
+        font_name: "fonts/OLDRRG.ttf"
+        text: root.parent.home_button_title
+        pos_hint: {"center_x": .5, "center_y": .35}
+        size_hint: .2, .1
+        background_normal: ""
+        background_color: 1.2, .3, .4, 1
+        on_press: root.parent.game_started()
+        disabled: not root.parent.start_game_enabled
+    Label:
+        font_size: dp(20)
+        text: "LEVEL: "
+        pos_hint: {"center_x": .35, "center_y": .20}
+    GridLayout:
+        spacing: 15
+        cols: 3
+        size_hint: 0.28, 0.08
+        pos_hint: {"center_x": .53, "center_y": .2}
+        ToggleButton:
+            font_size: dp(15)
+            font_name: "fonts/OLDRRG.ttf"
+            text: "Easy"
+            size_hint: .02, .08
+            background_normal: ""
+            background_color: "#8219bf"
+            on_state: root.parent.easy_mode(self)
+            disabled: not root.parent.easy_mode_enabled
+        ToggleButton:
+            font_size: dp(15)
+            font_name: "fonts/OLDRRG.ttf"
+            text: "Medium"
+            size_hint: 0.02, .08
+            background_normal: ""
+            background_color: "#8219bf"
+            on_state: root.parent.medium_mode(self)
+            disabled: not root.parent.medium_mode_enabled
+        ToggleButton:
+            font_size: dp(15)
+            font_name: "fonts/OLDRRG.ttf"
+            text: "Hard"
+            size_hint: 0.02, .08
+            background_normal: ""
+            background_color: "#8219bf"
+            on_state: root.parent.hard_mode(self)
+            disabled: not root.parent.hard_mode_enabled
+
+

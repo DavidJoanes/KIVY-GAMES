@@ -1,0 +1,32 @@
+#:import home home
+#<MainWidget2>:
+    #Screen:
+        #BoxLayout:
+            #orientation: "vertical"
+            #MDToolbar:
+                #title: "Spaceship Troopers"
+                #left_action_items: [["menu", lambda x: app.menu_button()]]
+
+
+MainWidget:
+
+
+<MainWidget>:
+
+    canvas.before:
+        Rectangle:
+            size: self.size
+            source: "images/bg4.jpg"
+    home_widget: home_widget
+    perspective_point_x: self.width/2
+    perspective_point_y: self.height * 0.75
+    Label:
+        text: root.score_text
+        font_size: dp(20)
+        font_name: "fonts/Eurostile.ttf"
+        size_hint: .2, .2
+        pos_hint: {"x": 0, "top": 1}
+        background_normal: ""
+        color: "#44eb70"
+    HomeWidget:
+        id: home_widget
