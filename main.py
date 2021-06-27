@@ -132,13 +132,15 @@ class MainWidget(RelativeLayout):
     def init_audio(self):
         self.welcome_sound = SoundLoader.load("audio/welcome.wav")
         self.begin_sound = SoundLoader.load("audio/begin.wav")
-        self.game_sound = SoundLoader.load("audio/game_music.mp3")
+        self.game_sound = SoundLoader.load("audio/game_music2.mp3")
+        self.game_sound2 = SoundLoader.load("audio/game_music3.mp3")
         self.game_over_sound = SoundLoader.load("audio/game_over.wav")
         self.restart_sound = SoundLoader.load("audio/restart.wav")
 
         self.welcome_sound.volume = 1
         self.begin_sound.volume = .5
         self.game_sound.volume = 1
+        self.game_sound2.volume = 1
         self.game_over_sound.volume = .7
         self.restart_sound.volume = .8
 
@@ -222,7 +224,6 @@ class MainWidget(RelativeLayout):
             last_coordinates = self.tiles_coordinates[-1]
             last_value_of_x = last_coordinates[0]
             last_value_of_y = last_coordinates[1] + 1
-        print("a")
 
         for x in range(len(self.tiles_coordinates), self.number_of_tiles):
             random_value = random.randint(0, 2)
@@ -251,7 +252,6 @@ class MainWidget(RelativeLayout):
                 self.tiles_coordinates.append((last_value_of_x, last_value_of_y))
 
             last_value_of_y += 1
-        print("b")
 
     def init_vertical_lines(self):
         with self.canvas:
@@ -492,6 +492,7 @@ class MainWidget(RelativeLayout):
             self.home_button_title = "RESTART"
             self.home_widget.opacity = 1
             self.game_sound.stop()
+            self.game_sound2.stop()
             self.game_over_sound.play()
             # Clock.schedule_once(self.play_game_over_sound, 3)
             print("GAME OVER!")
@@ -499,18 +500,17 @@ class MainWidget(RelativeLayout):
     # def play_game_over_sound(self, dt):
     #     self.game_over_sound.play()
 
-    # def continue_playing_game_sound(self, dt):
-    #     if not self.game_over_state:
-    #         self.game_sound.play()
+    def continue_playing_game_sound(self, dt):
+        if not self.game_over_state:
+            self.game_sound2.play()
 
     def game_started(self):
-        # print("Button")
         if self.game_over_state:
             self.restart_sound.play()
             self.game_sound.play()
-            # Clock.schedule_once(self.continue_playing_game_sound, 2)
         else:
             self.game_sound.play()
+            Clock.schedule_once(self.continue_playing_game_sound, 222)
         self.reset_game()
         self.game_started_state = True
         self.home_widget.opacity = 0
