@@ -255,7 +255,7 @@ class MainWidget(RelativeLayout):
 
     def init_vertical_lines(self):
         with self.canvas:
-            Color(1, 1, 1)
+            Color(0, 1, 1)
             # self.line = Line(points=[100, 0, 100, 100])
             for x in range(0, self.vertical_NB_LINES):
                 self.vertical_lines.append(Line())
@@ -307,7 +307,7 @@ class MainWidget(RelativeLayout):
 
     def init_horizontal_lines(self):
         with self.canvas:
-            Color(1, 1, 1)
+            Color(0, 1, 1)
             for x in range(0, self.horizontal_NB_LINES):
                 self.horizontal_lines.append(Line())
 
@@ -510,7 +510,7 @@ class MainWidget(RelativeLayout):
             self.game_sound.play()
         else:
             self.game_sound.play()
-            Clock.schedule_once(self.continue_playing_game_sound, 222)
+            Clock.schedule_once(self.continue_playing_game_sound, 330)
         self.reset_game()
         self.game_started_state = True
         self.home_widget.opacity = 0
