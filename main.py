@@ -482,7 +482,7 @@ class MainWidget(RelativeLayout):
                     if self.current_y_loop >= 1400:
                         self.SPEED_Y = 1.9
 
-                print(self.SPEED_Y)
+                # print(self.SPEED_Y)
             speed_x = (self.current_speed_x * self.width) / 100
             self.current_offset_x += (speed_x * time_factor)
 
@@ -510,7 +510,7 @@ class MainWidget(RelativeLayout):
             self.game_sound.play()
         else:
             self.game_sound.play()
-            Clock.schedule_once(self.continue_playing_game_sound, 330)
+            Clock.schedule_once(self.continue_playing_game_sound, 270)
         self.reset_game()
         self.game_started_state = True
         self.home_widget.opacity = 0
