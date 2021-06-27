@@ -510,7 +510,7 @@ class MainWidget(RelativeLayout):
             self.game_sound.play()
         else:
             self.game_sound.play()
-            Clock.schedule_once(self.continue_playing_game_sound, 270)
+            Clock.schedule_once(self.continue_playing_game_sound, 220)
         self.reset_game()
         self.game_started_state = True
         self.home_widget.opacity = 0
