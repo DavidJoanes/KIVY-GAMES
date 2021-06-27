@@ -67,7 +67,7 @@ class MainWidget(RelativeLayout):
     horizontal_LINE_SPACING = 0.1  # percentage of screen height
     horizontal_lines = []
 
-    SPEED_Y = .1  # speed_y axis
+    SPEED_Y = .05  # speed_y axis
     SPEED_X = 1
 
     current_offset_y = 0
@@ -94,6 +94,10 @@ class MainWidget(RelativeLayout):
     easy_mode_enabled = BooleanProperty(True)
     medium_mode_enabled = BooleanProperty(True)
     hard_mode_enabled = BooleanProperty(True)
+
+    easy = False
+    medium = False
+    hard = False
 
     home_title = StringProperty("S  P  A  C  E  S  H  I  P    T  R  O  O  P  E  R  S")
     home_button_title = StringProperty("START")
@@ -341,123 +345,144 @@ class MainWidget(RelativeLayout):
                 self.current_y_loop += 1
                 self.score_text = "SCORE: " + str(self.current_y_loop)
                 self.generate_tiles_coordinate()
-                if self.easy_mode:
-                    self.SPEED_Y += 0.05
+                if self.easy:
+                    self.SPEED_Y = 0.05
                     if self.current_y_loop >= 5:
                         self.SPEED_Y = .1
-                    elif self.current_y_loop >= 20:
+                    if self.current_y_loop >= 20:
+                        self.SPEED_Y = .15
+                    if self.current_y_loop >= 40:
                         self.SPEED_Y = .2
-                    elif self.current_y_loop >= 40:
+                    if self.current_y_loop >= 60:
+                        self.SPEED_Y = .25
+                    if self.current_y_loop >= 80:
+                        self.SPEED_Y = .3
+                    if self.current_y_loop >= 100:
+                        self.SPEED_Y = .35
+                    if self.current_y_loop >= 150:
                         self.SPEED_Y = .4
-                    elif self.current_y_loop >= 60:
+                    if self.current_y_loop >= 200:
+                        self.SPEED_Y = .45
+                    if self.current_y_loop >= 250:
+                        self.SPEED_Y = .5
+                    if self.current_y_loop >= 300:
+                        self.SPEED_Y = .55
+                    if self.current_y_loop >= 350:
                         self.SPEED_Y = .6
-                    elif self.current_y_loop >= 80:
-                        self.SPEED_Y = .8
-                    elif self.current_y_loop >= 100:
-                        self.SPEED_Y = 1
-                    elif self.current_y_loop >= 150:
-                        self.SPEED_Y = 1.3
-                    elif self.current_y_loop >= 200:
-                        self.SPEED_Y = 1.6
-                    elif self.current_y_loop >= 250:
-                        self.SPEED_Y = 1.8
-                    elif self.current_y_loop >= 300:
-                        self.SPEED_Y = 2
-                    elif self.current_y_loop >= 350:
-                        self.SPEED_Y = 2.3
-                    elif self.current_y_loop >= 400:
+                    if self.current_y_loop >= 400:
                         self.SPEED_Y = 2.6
-                    elif self.current_y_loop >= 550:
-                        self.SPEED_Y = 2.9
-                    elif self.current_y_loop >= 650:
-                        self.SPEED_Y = 3.1
-                    elif self.current_y_loop >= 750:
-                        self.SPEED_Y = 3.5
-                    elif self.current_y_loop >= 850:
-                        self.SPEED_Y = 3.7
-                    elif self.current_y_loop >= 950:
-                        self.SPEED_Y = 3.9
-                    elif self.current_y_loop >= 1050:
-                        self.SPEED_Y = 4.1
-                if self.medium_mode:
+                    if self.current_y_loop >= 550:
+                        self.SPEED_Y = .65
+                    if self.current_y_loop >= 650:
+                        self.SPEED_Y = .7
+                    if self.current_y_loop >= 750:
+                        self.SPEED_Y = .75
+                    if self.current_y_loop >= 850:
+                        self.SPEED_Y = .8
+                    if self.current_y_loop >= 950:
+                        self.SPEED_Y = .85
+                    if self.current_y_loop >= 1050:
+                        self.SPEED_Y = .9
+                    if self.current_y_loop >= 1200:
+                        self.SPEED_Y = 1.05
+                    if self.current_y_loop >= 1350:
+                        self.SPEED_Y = 1.1
+                    if self.current_y_loop >= 1500:
+                        self.SPEED_Y = 1.15
+                    if self.current_y_loop >= 1650:
+                        self.SPEED_Y = 1.2
+                    if self.current_y_loop >= 1800:
+                        self.SPEED_Y = 1.25
+                    if self.current_y_loop >= 1950:
+                        self.SPEED_Y = 1.3
+                    if self.current_y_loop >= 2100:
+                        self.SPEED_Y = 1.4
+                    if self.current_y_loop >= 2300:
+                        self.SPEED_Y = 1.5
+                if self.medium:
                     self.SPEED_Y = .1
                     if self.current_y_loop >= 5:
+                        self.SPEED_Y = .15
+                    if self.current_y_loop >= 20:
+                        self.SPEED_Y = .2
+                    if self.current_y_loop >= 40:
+                        self.SPEED_Y = .25
+                    if self.current_y_loop >= 60:
                         self.SPEED_Y = .3
-                    elif self.current_y_loop >= 20:
-                        self.SPEED_Y = .6
-                    elif self.current_y_loop >= 40:
-                        self.SPEED_Y = .9
-                    elif self.current_y_loop >= 60:
-                        self.SPEED_Y = 1.2
-                    elif self.current_y_loop >= 80:
-                        self.SPEED_Y = 1.5
-                    elif self.current_y_loop >= 100:
-                        self.SPEED_Y = 1.8
-                    elif self.current_y_loop >= 150:
-                        self.SPEED_Y = 2.1
-                    elif self.current_y_loop >= 200:
-                        self.SPEED_Y = 2.4
-                    elif self.current_y_loop >= 250:
-                        self.SPEED_Y = 2.7
-                    elif self.current_y_loop >= 300:
-                        self.SPEED_Y = 3
-                    elif self.current_y_loop >= 350:
-                        self.SPEED_Y = 3.3
-                    elif self.current_y_loop >= 400:
-                        self.SPEED_Y = 3.6
-                    elif self.current_y_loop >= 550:
-                        self.SPEED_Y = 3.9
-                    elif self.current_y_loop >= 650:
-                        self.SPEED_Y = 4.2
-                    elif self.current_y_loop >= 750:
-                        self.SPEED_Y = 4.5
-                    elif self.current_y_loop >= 850:
-                        self.SPEED_Y = 4.8
-                    elif self.current_y_loop >= 950:
-                        self.SPEED_Y = 5.2
-                    elif self.current_y_loop >= 1050:
-                        self.SPEED_Y = 5.5
-                if self.hard_mode:
-                    # while self.current_y_loop:
-                    #     self.SPEED_Y += 0.00000000000001
-                    # print(self.SPEED_Y)
-                    self.SPEED_Y = .25
-                    if self.current_y_loop >= 5:
+                    if self.current_y_loop >= 80:
+                        self.SPEED_Y = .35
+                    if self.current_y_loop >= 100:
+                        self.SPEED_Y = .4
+                    if self.current_y_loop >= 150:
+                        self.SPEED_Y = .45
+                    if self.current_y_loop >= 200:
                         self.SPEED_Y = .5
-                    elif self.current_y_loop >= 20:
+                    if self.current_y_loop >= 250:
+                        self.SPEED_Y = .55
+                    if self.current_y_loop >= 300:
+                        self.SPEED_Y = .6
+                    if self.current_y_loop >= 350:
+                        self.SPEED_Y = .65
+                    if self.current_y_loop >= 400:
+                        self.SPEED_Y = .7
+                    if self.current_y_loop >= 550:
+                        self.SPEED_Y = .75
+                    if self.current_y_loop >= 650:
+                        self.SPEED_Y = .85
+                    if self.current_y_loop >= 750:
+                        self.SPEED_Y = .95
+                    if self.current_y_loop >= 850:
+                        self.SPEED_Y = 1.05
+                    if self.current_y_loop >= 950:
+                        self.SPEED_Y = 1.15
+                    if self.current_y_loop >= 1050:
+                        self.SPEED_Y = 1.25
+                    if self.current_y_loop >= 1200:
+                        self.SPEED_Y = 1.35
+                    if self.current_y_loop >= 1350:
+                        self.SPEED_Y = 1.45
+                    if self.current_y_loop >= 1500:
+                        self.SPEED_Y = 1.55
+                    if self.current_y_loop >= 1700:
+                        self.SPEED_Y = 1.65
+                if self.hard:
+                    self.SPEED_Y = .2
+                    if self.current_y_loop >= 5:
+                        self.SPEED_Y = .3
+                    if self.current_y_loop >= 15:
+                        self.SPEED_Y = .4
+                    if self.current_y_loop >= 30:
+                        self.SPEED_Y = .5
+                    if self.current_y_loop >= 60:
+                        self.SPEED_Y = .6
+                    if self.current_y_loop >= 90:
+                        self.SPEED_Y = .7
+                    if self.current_y_loop >= 120:
+                        self.SPEED_Y = .8
+                    if self.current_y_loop >= 150:
+                        self.SPEED_Y = .9
+                    if self.current_y_loop >= 300:
                         self.SPEED_Y = 1
-                    elif self.current_y_loop >= 40:
+                    if self.current_y_loop >= 450:
+                        self.SPEED_Y = 1.1
+                    if self.current_y_loop >= 550:
+                        self.SPEED_Y = 1.2
+                    if self.current_y_loop >= 650:
+                        self.SPEED_Y = 1.3
+                    if self.current_y_loop >= 750:
+                        self.SPEED_Y = 1.4
+                    if self.current_y_loop >= 850:
                         self.SPEED_Y = 1.5
-                    elif self.current_y_loop >= 60:
-                        self.SPEED_Y = 2
-                    elif self.current_y_loop >= 80:
-                        self.SPEED_Y = 2.5
-                    elif self.current_y_loop >= 100:
-                        self.SPEED_Y = 3
-                    elif self.current_y_loop >= 150:
-                        self.SPEED_Y = 3.5
-                    elif self.current_y_loop >= 250:
-                        self.SPEED_Y = 4
-                    elif self.current_y_loop >= 350:
-                        self.SPEED_Y = 4.5
-                    elif self.current_y_loop >= 450:
-                        self.SPEED_Y = 5
-                    elif self.current_y_loop >= 550:
-                        self.SPEED_Y = 5.5
-                    elif self.current_y_loop >= 650:
-                        self.SPEED_Y = 6
-                    elif self.current_y_loop >= 750:
-                        self.SPEED_Y = 7
-                    elif self.current_y_loop >= 850:
-                        self.SPEED_Y = 8
-                    elif self.current_y_loop >= 950:
-                        self.SPEED_Y = 9
-                    elif self.current_y_loop >= 1000:
-                        self.SPEED_Y = 10
-                    elif self.current_y_loop >= 1200:
-                        self.SPEED_Y = 12
+                    if self.current_y_loop >= 950:
+                        self.SPEED_Y = 1.6
+                    if self.current_y_loop >= 1050:
+                        self.SPEED_Y = 1.7
+                    if self.current_y_loop >= 1200:
+                        self.SPEED_Y = 1.8
+                    if self.current_y_loop >= 1400:
+                        self.SPEED_Y = 1.9
 
-
+                print(self.SPEED_Y)
             speed_x = (self.current_speed_x * self.width) / 100
             self.current_offset_x += (speed_x * time_factor)
 
@@ -492,6 +517,7 @@ class MainWidget(RelativeLayout):
 
     def easy_mode(self, widget):
         # print("Toggle button " + widget.state)
+        self.easy = True
         if widget.state == "normal":
             widget.text = "Easy"
             self.start_game_enabled = False
@@ -504,7 +530,7 @@ class MainWidget(RelativeLayout):
             self.hard_mode_enabled = False
 
     def medium_mode(self, widget):
-        # print("Toggle button " + widget.state)
+        self.medium = True
         if widget.state == "normal":
             widget.text = "Medium"
             self.start_game_enabled = False
@@ -517,7 +543,7 @@ class MainWidget(RelativeLayout):
             self.hard_mode_enabled = False
 
     def hard_mode(self, widget):
-        # print("Toggle button " + widget.state)
+        self.hard = True
         if widget.state == "normal":
             widget.text = "Hard"
             self.start_game_enabled = False
@@ -532,10 +558,6 @@ class MainWidget(RelativeLayout):
 class Spaceship_Troopers(App):
     def build(self):
         self.title = "Spaceship Troopers"
-        # return CustomActionBar()
-
-    # def menu_button(self):
-    #     print("clicked")
     pass
 
 
