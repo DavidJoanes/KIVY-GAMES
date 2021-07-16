@@ -1,20 +1,20 @@
 from kivy import platform
 from kivy.config import Config
 from kivy.core.audio import SoundLoader
+
 Config.set('graphics', 'width', '900')
 Config.set('graphics', 'height', '400')
 
+from kivymd.app import MDApp
 from kivy.uix.relativelayout import RelativeLayout
-import random
+import random, highscoreDatabase
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.app import App
+from kivy.uix.widget import Widget
 from kivy.graphics import Color, Line, Quad, Triangle
 from kivy.properties import NumericProperty, Clock, ObjectProperty, StringProperty, BooleanProperty
-from kivy.uix.widget import Widget
 from kivy.uix.actionbar import ActionBar
-
-
 
 Builder.load_file("home.kv")
 
@@ -48,6 +48,7 @@ Builder.load_string('''
 
 class CustomActionBar(ActionBar):
     pass
+
 
 class MainWidget(RelativeLayout):
     from transforms import transform, transform_2D, transform_perspective
@@ -99,6 +100,10 @@ class MainWidget(RelativeLayout):
 
     home_title = StringProperty("S  P  A  C  E  S  H  I  P    T  R  O  O  P  E  R  S")
     home_button_title = StringProperty("START")
+    new_highscore_title = StringProperty("")
+    highscore = []
+    high_scores = StringProperty("HIGH SCORES: ")
+    high_scores_enabled = BooleanProperty(True)
 
     score_text = StringProperty()
     begin_sound = None
@@ -124,7 +129,7 @@ class MainWidget(RelativeLayout):
             self._keyboard.bind(on_key_down=self.on_keyboard_down)
             self._keyboard.bind(on_key_up=self.on_keyboard_up)
 
-        Clock.schedule_interval(self.update, 1/60)
+        Clock.schedule_interval(self.update, 1 / 60)
         self.welcome_sound.play()
 
     def init_audio(self):
@@ -214,7 +219,7 @@ class MainWidget(RelativeLayout):
         last_value_of_y = 0
         # clean the coordinates that are out of the screen
         # tile_y < self.current_y_loop
-        for x in range(len(self.tiles_coordinates)-1, -1, -1):
+        for x in range(len(self.tiles_coordinates) - 1, -1, -1):
             if self.tiles_coordinates[x][1] < self.current_y_loop:
                 del self.tiles_coordinates[x]
 
@@ -281,7 +286,7 @@ class MainWidget(RelativeLayout):
             tile = self.tiles[x]
             tile_coordinates = self.tiles_coordinates[x]
             xmin, ymin = self.get_tile_coordinates(tile_coordinates[0], tile_coordinates[1])
-            xmax, ymax = self.get_tile_coordinates(tile_coordinates[0]+1, tile_coordinates[1]+1)
+            xmax, ymax = self.get_tile_coordinates(tile_coordinates[0] + 1, tile_coordinates[1] + 1)
 
             # 2 3
             #
@@ -323,11 +328,10 @@ class MainWidget(RelativeLayout):
             x2, y2 = self.transform(xmax, line_y)
             self.horizontal_lines[x].points = [x1, y1, x2, y2]
 
-
     def update(self, dt):
         # print("update")
         # print("dt: "+str(dt*60))
-        time_factor = dt*60
+        time_factor = dt * 60
         self.update_vertical_lines()
         self.update_horizontal_lines()
         self.update_tiles()
@@ -403,46 +407,30 @@ class MainWidget(RelativeLayout):
                         self.SPEED_Y = .15
                     if self.current_y_loop >= 20:
                         self.SPEED_Y = .2
-                    if self.current_y_loop >= 40:
-                        self.SPEED_Y = .25
                     if self.current_y_loop >= 60:
-                        self.SPEED_Y = .3
-                    if self.current_y_loop >= 80:
-                        self.SPEED_Y = .35
+                        self.SPEED_Y = .25
                     if self.current_y_loop >= 100:
-                        self.SPEED_Y = .4
-                    if self.current_y_loop >= 150:
-                        self.SPEED_Y = .45
+                        self.SPEED_Y = .3
                     if self.current_y_loop >= 200:
-                        self.SPEED_Y = .5
-                    if self.current_y_loop >= 250:
-                        self.SPEED_Y = .55
-                    if self.current_y_loop >= 300:
-                        self.SPEED_Y = .6
+                        self.SPEED_Y = .35
                     if self.current_y_loop >= 350:
-                        self.SPEED_Y = .65
+                        self.SPEED_Y = .4
                     if self.current_y_loop >= 400:
-                        self.SPEED_Y = .7
+                        self.SPEED_Y = .45
                     if self.current_y_loop >= 550:
-                        self.SPEED_Y = .75
-                    if self.current_y_loop >= 650:
-                        self.SPEED_Y = .85
+                        self.SPEED_Y = .5
                     if self.current_y_loop >= 750:
-                        self.SPEED_Y = .95
-                    if self.current_y_loop >= 850:
-                        self.SPEED_Y = 1.05
+                        self.SPEED_Y = .6
                     if self.current_y_loop >= 950:
-                        self.SPEED_Y = 1.15
+                        self.SPEED_Y = .7
                     if self.current_y_loop >= 1050:
-                        self.SPEED_Y = 1.25
-                    if self.current_y_loop >= 1200:
-                        self.SPEED_Y = 1.35
+                        self.SPEED_Y = .8
                     if self.current_y_loop >= 1350:
-                        self.SPEED_Y = 1.45
+                        self.SPEED_Y = .9
                     if self.current_y_loop >= 1500:
-                        self.SPEED_Y = 1.55
+                        self.SPEED_Y = 1.0
                     if self.current_y_loop >= 1700:
-                        self.SPEED_Y = 1.65
+                        self.SPEED_Y = 1.2
                 if self.hard:
                     self.SPEED_Y = .2
                     if self.current_y_loop >= 5:
@@ -451,34 +439,28 @@ class MainWidget(RelativeLayout):
                         self.SPEED_Y = .4
                     if self.current_y_loop >= 30:
                         self.SPEED_Y = .5
-                    if self.current_y_loop >= 60:
-                        self.SPEED_Y = .6
                     if self.current_y_loop >= 90:
                         self.SPEED_Y = .7
-                    if self.current_y_loop >= 120:
-                        self.SPEED_Y = .8
                     if self.current_y_loop >= 150:
                         self.SPEED_Y = .9
                     if self.current_y_loop >= 300:
-                        self.SPEED_Y = 1
-                    if self.current_y_loop >= 450:
                         self.SPEED_Y = 1.1
-                    if self.current_y_loop >= 550:
-                        self.SPEED_Y = 1.2
-                    if self.current_y_loop >= 650:
+                    if self.current_y_loop >= 450:
                         self.SPEED_Y = 1.3
-                    if self.current_y_loop >= 750:
-                        self.SPEED_Y = 1.4
-                    if self.current_y_loop >= 850:
+                    if self.current_y_loop >= 650:
                         self.SPEED_Y = 1.5
-                    if self.current_y_loop >= 950:
+                    if self.current_y_loop >= 750:
                         self.SPEED_Y = 1.6
-                    if self.current_y_loop >= 1050:
+                    if self.current_y_loop >= 850:
                         self.SPEED_Y = 1.7
-                    if self.current_y_loop >= 1200:
+                    if self.current_y_loop >= 950:
                         self.SPEED_Y = 1.8
-                    if self.current_y_loop >= 1400:
+                    if self.current_y_loop >= 1050:
                         self.SPEED_Y = 1.9
+                    if self.current_y_loop >= 1200:
+                        self.SPEED_Y = 2
+                    if self.current_y_loop >= 1400:
+                        self.SPEED_Y = 2.2
 
                 # print(self.SPEED_Y)
             speed_x = (self.current_speed_x * self.width) / 100
@@ -492,8 +474,13 @@ class MainWidget(RelativeLayout):
             self.game_sound.stop()
             self.game_sound2.stop()
             self.game_over_sound.play()
-            # Clock.schedule_once(self.play_game_over_sound, 3)
-            print("GAME OVER!")
+            if highscoreDatabase.newHighScore(self.current_y_loop):
+                new = highscoreDatabase.newHighScore(self.current_y_loop)
+                highscoreDatabase.addHighScore(self.current_y_loop)
+                self.new_highscore_title = f"New Highscore!: {new}"
+            else:
+                self.new_highscore_title = ""
+            Clock.schedule_once(self.continue_playing_game_sound, 220)
 
     # def play_game_over_sound(self, dt):
     #     self.game_over_sound.play()
@@ -553,9 +540,21 @@ class MainWidget(RelativeLayout):
             self.easy_mode_enabled = False
             self.medium_mode_enabled = False
 
-class Spaceship_Troopers(App):
+    def high_score_mode(self, widget):
+        new = highscoreDatabase.viewHighScores()
+        self.high_scores_enabled = True
+        if widget.state == "normal":
+            widget.text = "View"
+            self.high_scores = f"HIGH SCORES: "
+        else:
+            widget.text = "Close"
+            self.high_scores = f"HIGH SCORES:   {new}"
+
+
+class Spaceship_Troopers(MDApp):
     def build(self):
         self.title = "Spaceship Troopers"
+
     pass
 
 
