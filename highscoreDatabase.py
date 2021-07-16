@@ -3,7 +3,6 @@ import sqlite3
 
 
 # ------------------------------Create main-table (for high score)----------------------------#
-
 def createHighScoreTable():
     con = sqlite3.connect("highscoreDatabase.db")
     cur = con.cursor()
@@ -35,16 +34,6 @@ def viewHighScores():
     for row in rows:
         hsList.append(row[-1])
     return hsList[-4:]
-
-
-def viewHighScores2():
-    con = sqlite3.connect("highscoreDatabase.db")
-    cur = con.cursor()
-    cur.execute("SELECT * FROM HighScores")
-    rows = cur.fetchall()
-    print(rows)
-    con.close()
-    return rows
 
 
 def newHighScore(Highscore):
