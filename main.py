@@ -93,6 +93,7 @@ class MainWidget(RelativeLayout):
     easy_mode_enabled = BooleanProperty(True)
     medium_mode_enabled = BooleanProperty(True)
     hard_mode_enabled = BooleanProperty(True)
+    game_mode = StringProperty("")
 
     easy = False
     medium = False
@@ -347,7 +348,7 @@ class MainWidget(RelativeLayout):
                 self.current_y_loop += 1
                 self.score_text = "SCORE: " + str(self.current_y_loop)
                 self.generate_tiles_coordinate()
-                if self.easy:
+                if self.game_mode == "Easy":
                     self.SPEED_Y = 0.05
                     if self.current_y_loop >= 5:
                         self.SPEED_Y = .1
@@ -401,7 +402,7 @@ class MainWidget(RelativeLayout):
                         self.SPEED_Y = 1.2
                     if self.current_y_loop >= 3500:
                         self.SPEED_Y = 1.25
-                if self.medium:
+                if self.game_mode == "Medium":
                     self.SPEED_Y = .1
                     if self.current_y_loop >= 5:
                         self.SPEED_Y = .15
@@ -431,7 +432,7 @@ class MainWidget(RelativeLayout):
                         self.SPEED_Y = 1.0
                     if self.current_y_loop >= 1700:
                         self.SPEED_Y = 1.2
-                if self.hard:
+                if self.game_mode == "Hard":
                     self.SPEED_Y = .2
                     if self.current_y_loop >= 5:
                         self.SPEED_Y = .3
@@ -440,25 +441,25 @@ class MainWidget(RelativeLayout):
                     if self.current_y_loop >= 30:
                         self.SPEED_Y = .5
                     if self.current_y_loop >= 90:
-                        self.SPEED_Y = .7
+                        self.SPEED_Y = .65
                     if self.current_y_loop >= 150:
-                        self.SPEED_Y = .9
+                        self.SPEED_Y = .8
                     if self.current_y_loop >= 300:
-                        self.SPEED_Y = 1.1
+                        self.SPEED_Y = 1.05
                     if self.current_y_loop >= 450:
-                        self.SPEED_Y = 1.3
+                        self.SPEED_Y = 1.2
                     if self.current_y_loop >= 650:
-                        self.SPEED_Y = 1.5
+                        self.SPEED_Y = 1.35
                     if self.current_y_loop >= 750:
-                        self.SPEED_Y = 1.6
+                        self.SPEED_Y = 1.45
                     if self.current_y_loop >= 850:
-                        self.SPEED_Y = 1.7
+                        self.SPEED_Y = 1.6
                     if self.current_y_loop >= 950:
-                        self.SPEED_Y = 1.8
+                        self.SPEED_Y = 1.7
                     if self.current_y_loop >= 1050:
-                        self.SPEED_Y = 1.9
+                        self.SPEED_Y = 1.8
                     if self.current_y_loop >= 1200:
-                        self.SPEED_Y = 2
+                        self.SPEED_Y = 1.95
                     if self.current_y_loop >= 1400:
                         self.SPEED_Y = 2.2
 
@@ -508,6 +509,7 @@ class MainWidget(RelativeLayout):
             self.hard_mode_enabled = True
         else:
             widget.text = "EASY"
+            self.game_mode = "Easy"
             self.start_game_enabled = True
             self.medium_mode_enabled = False
             self.hard_mode_enabled = False
@@ -521,6 +523,7 @@ class MainWidget(RelativeLayout):
             self.hard_mode_enabled = True
         else:
             widget.text = "MEDIUM"
+            self.game_mode = "Medium"
             self.start_game_enabled = True
             self.easy_mode_enabled = False
             self.hard_mode_enabled = False
@@ -534,6 +537,7 @@ class MainWidget(RelativeLayout):
             self.medium_mode_enabled = True
         else:
             widget.text = "HARD"
+            self.game_mode = "Hard"
             self.start_game_enabled = True
             self.easy_mode_enabled = False
             self.medium_mode_enabled = False
