@@ -24,10 +24,10 @@ def on_keyboard_down(self, keyboard, keycode, text, modifiers):
 def on_touch_down(self, touch):
     if not self.game_over_state and self.game_started_state:
         if touch.x < self.width / 2:
-            print("<-")
+            # print("<-")
             self.current_speed_x = self.SPEED_X
         else:
-            print("->")
+            # print("->")
             self.current_speed_x = -self.SPEED_X
     return super(RelativeLayout, self).on_touch_down(touch)
 

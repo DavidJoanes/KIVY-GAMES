@@ -353,54 +353,54 @@ class MainWidget(RelativeLayout):
                         self.SPEED_Y = .1
                     if self.current_y_loop >= 20:
                         self.SPEED_Y = .15
-                    if self.current_y_loop >= 40:
-                        self.SPEED_Y = .2
                     if self.current_y_loop >= 60:
-                        self.SPEED_Y = .25
-                    if self.current_y_loop >= 80:
-                        self.SPEED_Y = .3
+                        self.SPEED_Y = .2
                     if self.current_y_loop >= 100:
+                        self.SPEED_Y = .25
+                    if self.current_y_loop >= 130:
+                        self.SPEED_Y = .3
+                    if self.current_y_loop >= 160:
                         self.SPEED_Y = .35
-                    if self.current_y_loop >= 150:
-                        self.SPEED_Y = .4
                     if self.current_y_loop >= 200:
+                        self.SPEED_Y = .4
+                    if self.current_y_loop >= 240:
                         self.SPEED_Y = .45
-                    if self.current_y_loop >= 250:
+                    if self.current_y_loop >= 280:
                         self.SPEED_Y = .5
-                    if self.current_y_loop >= 300:
+                    if self.current_y_loop >= 320:
                         self.SPEED_Y = .55
-                    if self.current_y_loop >= 350:
+                    if self.current_y_loop >= 360:
                         self.SPEED_Y = .6
                     if self.current_y_loop >= 400:
                         self.SPEED_Y = 2.6
-                    if self.current_y_loop >= 550:
+                    if self.current_y_loop >= 450:
                         self.SPEED_Y = .65
-                    if self.current_y_loop >= 650:
+                    if self.current_y_loop >= 500:
                         self.SPEED_Y = .7
-                    if self.current_y_loop >= 750:
+                    if self.current_y_loop >= 600:
+                        self.SPEED_Y = .725
+                    if self.current_y_loop >= 800:
                         self.SPEED_Y = .75
-                    if self.current_y_loop >= 850:
-                        self.SPEED_Y = .8
-                    if self.current_y_loop >= 950:
+                    if self.current_y_loop >= 1100:
+                        self.SPEED_Y = .775
+                    if self.current_y_loop >= 1300:
                         self.SPEED_Y = .85
-                    if self.current_y_loop >= 1050:
-                        self.SPEED_Y = .9
-                    if self.current_y_loop >= 1200:
-                        self.SPEED_Y = 1.05
-                    if self.current_y_loop >= 1350:
-                        self.SPEED_Y = 1.1
                     if self.current_y_loop >= 1500:
+                        self.SPEED_Y = 1.0
+                    if self.current_y_loop >= 1700:
+                        self.SPEED_Y = 1.025
+                    if self.current_y_loop >= 2000:
+                        self.SPEED_Y = 1.05
+                    if self.current_y_loop >= 2200:
+                        self.SPEED_Y = 1.1
+                    if self.current_y_loop >= 2500:
+                        self.SPEED_Y = 1.125
+                    if self.current_y_loop >= 2800:
                         self.SPEED_Y = 1.15
-                    if self.current_y_loop >= 1650:
+                    if self.current_y_loop >= 3200:
                         self.SPEED_Y = 1.2
-                    if self.current_y_loop >= 1800:
+                    if self.current_y_loop >= 3500:
                         self.SPEED_Y = 1.25
-                    if self.current_y_loop >= 1950:
-                        self.SPEED_Y = 1.3
-                    if self.current_y_loop >= 2100:
-                        self.SPEED_Y = 1.4
-                    if self.current_y_loop >= 2300:
-                        self.SPEED_Y = 1.5
                 if self.medium:
                     self.SPEED_Y = .1
                     if self.current_y_loop >= 5:
@@ -462,7 +462,6 @@ class MainWidget(RelativeLayout):
                     if self.current_y_loop >= 1400:
                         self.SPEED_Y = 2.2
 
-                # print(self.SPEED_Y)
             speed_x = (self.current_speed_x * self.width) / 100
             self.current_offset_x += (speed_x * time_factor)
 
@@ -501,7 +500,6 @@ class MainWidget(RelativeLayout):
         self.home_widget.opacity = 0
 
     def easy_mode(self, widget):
-        # print("Toggle button " + widget.state)
         self.easy = True
         if widget.state == "normal":
             widget.text = "Easy"
